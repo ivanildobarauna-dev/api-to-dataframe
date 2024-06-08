@@ -2,11 +2,11 @@
 
 ![Project Status](https://img.shields.io/badge/status-done-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/IvanildoBarauna/api-to-dataframe) ![Python Version](https://img.shields.io/badge/python-3.9-blue) ![GitHub Workflow Status](https://github.com/IvanildoBarauna/api-to-dataframe/actions/workflows/CI-CD.yaml/badge.svg)
-[![codecov](https://codecov.io/gh/IvanildoBarauna/api-to-dataframe/branch/main/graph/badge.svg?token=GEGNHFM6P)](https://codecov.io/gh/IvanildoBarauna/api-to-dataframe)
+[![codecov](https://codecov.io/gh/IvanildoBarauna/api-to-dataframe/graph/badge.svg?token=r1APEyHiCu)](https://codecov.io/gh/IvanildoBarauna/api-to-dataframe)
 
 ## Code Coverage KPI Graph
 
-[![codecov](https://codecov.io/gh/IvanildoBarauna/api-to-dataframe/graphs/sunburst.svg?token=GEGNHFM6PS)](https://codecov.io/gh/IvanildoBarauna/api-to-dataframe)
+[![codecov](https://codecov.io/gh/IvanildoBarauna/api-to-dataframe/graphs/sunburst.svg?token=r1APEyHiCu)](https://codecov.io/gh/IvanildoBarauna/api-to-dataframe)
 
 ## Project Stack
 
