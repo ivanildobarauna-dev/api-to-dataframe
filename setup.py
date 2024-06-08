@@ -8,8 +8,8 @@ def parse_requirements(filename):
 
 
 setup(
-    name='"Python Application"',
-    version="1.0.0",
+    name='api-to-dataframe',
+    version="v0.0.1",
     packages=find_packages(),
     install_requires=parse_requirements("requirements.txt"),
 )
