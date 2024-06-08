@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "python-application"
-version = "v1.0.0"
-description = "Python Application"
+name = "api-to-dataframe"
+version = "v0.0.1"
+description = "'api-to-dataframe' é uma biblioteca Python que facilita a obtenção de dados de endpoints de API, convertendo-os diretamente em DataFrames do Pandas. Esta biblioteca oferece funcionalidades robustas, incluindo estratégias de retry para requisições falhadas e geração automática de relatórios detalhados sobre os dados recebidos."
 authors = ["IvanildoBarauna <ivanildo.jnr@outlook.com>"]
 readme = "README.md"
 license = "MIT"
