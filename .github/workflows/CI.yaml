@@ -1,4 +1,4 @@
-name: Code Coverage
+name: Tests and Pre-build
 
 on:
   pull_request:

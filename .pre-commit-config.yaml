@@ -1,4 +1,12 @@
 repos:
-  -   repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v3.4.0
-      hooks: []
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks: []
+
+#  - repo: local
+#    hooks:
+#      - id: version-increment
+#        name: version-increment
+#        entry: ./version_increment.sh
+#        language: script
+#        always_run: true
