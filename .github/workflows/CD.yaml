@@ -1,7 +1,13 @@
 name: Build, Version, Release and Publish Package
 
 on:
+  pull_request:
+    branches:
+      - main
+
   workflow_dispatch:
+    with:
+      ref: ${{ github.head_ref }}
 
 jobs:
   build:
@@ -26,36 +32,17 @@ jobs:
       - name: Increment version
         run: |
           poetry version patch  # params: patch, minor, major
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git commit -am "chore: increment version"
+          git push
           git tag $(poetry version -s)
           git push origin --tags
 
-      - name: Build package
-        run: poetry build
-
-      - name: Publish package to PyPI
-        env:
-          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
-        run: poetry publish --username __token__ --password $POETRY_PYPI_TOKEN_PYPI
-
-      - name: Create GitHub Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: $(poetry version -s)
-          release_name: Release $(poetry version -s)
-          body: |
-            Release $(poetry version -s) created.
-          draft: false
-          prerelease: false
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/your-package-name-$(poetry version -s).tar.gz
-          asset_name: your-package-name-$(poetry version -s).tar.gz
-          asset_content_type: application/gzip
+#      - name: Build package
+#        run: poetry build
+#
+#      - name: Publish package to PyPI
+#        env:
+#          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
+#        run: poetry publish --username __token__ --password $POETRY_PYPI_TOKEN_PYPI
