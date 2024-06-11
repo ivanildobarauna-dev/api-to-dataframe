@@ -24,11 +24,12 @@ jobs:
       - name: Setup tests
         run: |
           pip install --upgrade pip
-          pip install poetry
+          curl -sSL https://install.python-poetry.org | python3 -
+          poetry config virtualenvs.create false
           poetry install
 
       - name: Run tests & CodeCov
-        run: |
+        run: |          
           coverage run -m pytest
           coverage report
           coverage xml
