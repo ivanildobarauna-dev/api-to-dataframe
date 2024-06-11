@@ -39,3 +39,33 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage.xml
+
+    build:
+      if: github.actor != 'actions[bot]'
+      runs-on: ubuntu-latest
+
+      needs: test
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+          with:
+            ref: ${{ github.head_ref }}
+
+
+        - name: Set up Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.9'
+
+        - name: Install Poetry
+          run: |
+            pip install --upgrade pip
+            curl -sSL https://install.python-poetry.org | python3 -
+            poetry config virtualenvs.create false
+            poetry install
+
+        - name: Increment version
+          run: |
+            poetry version patch  # params: patch, minor, major
+
