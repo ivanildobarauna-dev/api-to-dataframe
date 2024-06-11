@@ -25,9 +25,14 @@ jobs:
           poetry config virtualenvs.create false
           poetry install
 
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+          sudo apt-add-repository https://cli.github.com/packages
+          sudo apt update
+          sudo apt install gh
+
       - name: Increment version
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           poetry version patch  # params: patch, minor, major
           git config --global user.name 'GitHub Actions'
@@ -36,7 +41,8 @@ jobs:
           git checkout -b $BRANCH_NAME
           git commit -am "chore: Incremented version"
           git push --set-upstream origin $BRANCH_NAME
-          gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
+          echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
+          unset GITHUB_TOKEN
           gh pr create --title "Version increment" --body "Incremented version to $(poetry version -s)" --head $BRANCH_NAME --base main
           gh pr merge --squash --admin --delete-branch
           git checkout main
