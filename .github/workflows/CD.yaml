@@ -26,8 +26,6 @@ jobs:
       - name: Increment version
         run: |
           poetry version patch  # params: patch, minor, major
-          git commit -am "chore: Incremented version"
-          git push 
           git tag $(poetry version -s)
           git push origin --tags
 
