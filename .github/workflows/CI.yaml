@@ -23,6 +23,8 @@ jobs:
 
       - name: Setup tests
         run: |
+          pip install --upgrade pip
+          pip install poetry
           poetry shell
           poetry install
 
