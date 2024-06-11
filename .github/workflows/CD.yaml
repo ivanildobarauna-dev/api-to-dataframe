@@ -5,6 +5,7 @@ on:
     branches:
       - main
 
+  ## For manual executions
   workflow_dispatch:
     with:
       ref: ${{ github.head_ref }}
