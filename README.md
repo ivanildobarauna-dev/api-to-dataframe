@@ -1,19 +1,16 @@
 # API to DataFrame
 Your solution to convert API responses to Pandas DataFrames with retry strategies and detailed reports.
 
-![GitHub Created At](https://img.shields.io/github/created-at/IvanildoBarauna/api-to-dataframe?style=for-the-badge&logo=github&link=github.com%2FIvanildoBarauna%2Fapi-to-dataframe)
-![PyPI - Status](https://img.shields.io/pypi/status/api-to-dataframe?style=for-the-badge&logo=pypi)
+[![Github](https://img.shields.io/badge/-Go_to_Github_repository-05122A?style=flat&logo=github)](https://github.com/IvanildoBarauna/api-to-dataframe)
 
-![PyPI - Downloads](https://img.shields.io/pypi/dm/api-to-dataframe?style=for-the-badge&logo=pypi)
-![PyPI - Version](https://img.shields.io/pypi/v/api-to-dataframe?style=for-the-badge&logo=pypi)
+[![PyPI - Status](https://img.shields.io/pypi/status/api-to-dataframe?style=for-the-badge&logo=pypi)](https://pypi.org/project/api-to-dataframe/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/api-to-dataframe?style=for-the-badge&logo=pypi)](https://pypi.org/project/api-to-dataframe/)
+[![PyPI - Version](https://img.shields.io/pypi/v/api-to-dataframe?style=for-the-badge&logo=pypi)](https://pypi.org/project/api-to-dataframe/#history)
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/api-to-dataframe?style=for-the-badge&logo=python)
 
 [![CI](https://img.shields.io/github/actions/workflow/status/IvanildoBarauna/api-to-dataframe/CI.yaml?&style=for-the-badge&logo=githubactions&cacheSeconds=60&label=Tests+and+pre+build)](https://github.com/IvanildoBarauna/api-to-dataframe/actions/workflows/CI.yaml)
-
 [![CD](https://img.shields.io/github/actions/workflow/status/IvanildoBarauna/api-to-dataframe/CD.yaml?&style=for-the-badge&logo=githubactions&cacheSeconds=60&event=release&label=Package_publication)](https://github.com/IvanildoBarauna/api-to-dataframe/actions/workflows/CD.yaml)
-
-
 
 ![Codecov](https://img.shields.io/codecov/c/github/IvanildoBarauna/api-to-dataframe?style=for-the-badge&logo=codecov)
 
@@ -27,6 +24,7 @@ Your solution to convert API responses to Pandas DataFrames with retry strategie
 ![pypi](https://img.shields.io/badge/-pypi-05122A?style=flat&logo=pypi)&nbsp;
 ![pandas](https://img.shields.io/badge/-pandas-05122A?style=flat&logo=pandas)&nbsp;
 ![pytest](https://img.shields.io/badge/-pytest-05122A?style=flat&logo=pytest)&nbsp;
+
 
 
 ## Library Description
