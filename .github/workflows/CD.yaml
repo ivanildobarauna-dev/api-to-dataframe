@@ -7,8 +7,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  - build_publish
-   - name: Build package
+  build_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install Poetry
+        run: |
+          pip install --upgrade pip
+          curl -sSL https://install.python-poetry.org | python3 -
+          poetry config virtualenvs.create false
+          poetry install
+
+      - name: Build package
         run: poetry build
 
       - name: Publish package to PyPI
