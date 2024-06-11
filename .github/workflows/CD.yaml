@@ -1,9 +1,10 @@
 name: Version Control
 
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Code Coverage"]
+    types:
+      - completed
 
   workflow_dispatch:
 
@@ -11,8 +12,6 @@ jobs:
   build:
     if: github.actor != 'actions[bot]'
     runs-on: ubuntu-latest
-
-    needs: [test]
 
     steps:
       - name: Checkout code
