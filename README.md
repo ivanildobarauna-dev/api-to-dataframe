@@ -9,8 +9,10 @@ Your solution to convert API responses to Pandas DataFrames with retry strategie
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/api-to-dataframe?style=for-the-badge&logo=python)
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/IvanildoBarauna/api-to-dataframe/CI.yaml?branch=main&style=for-the-badge&logo=githubactions&cacheSeconds=60)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/IvanildoBarauna/api-to-dataframe/CD.yaml?branch=main&style=for-the-badge&logo=githubactions&cacheSeconds=60)
+[![CI](https://img.shields.io/github/actions/workflow/status/IvanildoBarauna/api-to-dataframe/CI.yaml?&style=for-the-badge&logo=githubactions&cacheSeconds=60&label=Tests+and+pre+build)](https://github.com/IvanildoBarauna/api-to-dataframe/actions/workflows/CI.yaml)
+
+[![CD](https://img.shields.io/github/actions/workflow/status/IvanildoBarauna/api-to-dataframe/CD.yaml?&style=for-the-badge&logo=githubactions&cacheSeconds=60&event=release&label=Package_publication)](https://github.com/IvanildoBarauna/api-to-dataframe/actions/workflows/CD.yaml)
+
 
 
 ![Codecov](https://img.shields.io/codecov/c/github/IvanildoBarauna/api-to-dataframe?style=for-the-badge&logo=codecov)
