@@ -1,22 +1,19 @@
 # API to DataFrame
 Your solution to convert API responses to Pandas DataFrames with retry strategies and detailed reports.
 
-![GitHub Created At](https://img.shields.io/github/created-at/IvanildoBarauna/api-to-dataframe)
+![GitHub Created At](https://img.shields.io/github/created-at/IvanildoBarauna/api-to-dataframe?style=for-the-badge&logo=github&link=github.com%2FIvanildoBarauna%2Fapi-to-dataframe)
+![PyPI - Status](https://img.shields.io/pypi/status/api-to-dataframe?style=for-the-badge&logo=pypi)
 
-![PyPI - Status](https://img.shields.io/pypi/status/api-to-dataframe)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/api-to-dataframe)
-![PyPI - Version](https://img.shields.io/pypi/v/api-to-dataframe)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/api-to-dataframe?style=for-the-badge&logo=pypi)
+![PyPI - Version](https://img.shields.io/pypi/v/api-to-dataframe?style=for-the-badge&logo=pypi)
 
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/api-to-dataframe)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/api-to-dataframe?style=for-the-badge&logo=python)
+
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/IvanildoBarauna/api-to-dataframe/CI.yaml?branch=main&style=for-the-badge&logo=githubactions&cacheSeconds=60)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/IvanildoBarauna/api-to-dataframe/CD.yaml?branch=main&style=for-the-badge&logo=githubactions&cacheSeconds=60)
 
 
-![GitHub Workflow Status](https://github.com/IvanildoBarauna/api-to-dataframe/actions/workflows/CI.yaml/badge.svg)
-![GitHub Workflow Status](https://github.com/IvanildoBarauna/api-to-dataframe/actions/workflows/CD.yaml/badge.svg)
-[![codecov](https://codecov.io/gh/IvanildoBarauna/api-to-dataframe/graph/badge.svg?token=r1APEyHiCu)](https://codecov.io/gh/IvanildoBarauna/api-to-dataframe)
-
-## Code Coverage KPI Graph
-
-[![codecov](https://codecov.io/gh/IvanildoBarauna/api-to-dataframe/graphs/sunburst.svg?token=r1APEyHiCu)](https://codecov.io/gh/IvanildoBarauna/api-to-dataframe)
+![Codecov](https://img.shields.io/codecov/c/github/IvanildoBarauna/api-to-dataframe?style=for-the-badge&logo=codecov)
 
 ## Project Stack
 
@@ -33,3 +30,4 @@ Your solution to convert API responses to Pandas DataFrames with retry strategie
 ## Library Description
 
 Python library that simplifies obtaining data from API endpoints by converting them directly into Pandas DataFrames. This library offers robust features, including retry strategies for failed requests and automatic generation of detailed reports on the received data.
+
