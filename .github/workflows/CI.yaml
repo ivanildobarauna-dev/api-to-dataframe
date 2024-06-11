@@ -5,6 +5,7 @@ on:
     branches:
       - main
 
+  # For manual triggers
   workflow_dispatch:
 
 jobs:
