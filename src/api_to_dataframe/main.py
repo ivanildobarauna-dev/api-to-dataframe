@@ -10,7 +10,7 @@ class ClientBuilder:
             self.endpoint = endpoint
 
     def _response_to_json(self):
-        response = requests.get(self.url)
+        response = requests.get(self.endpoint)
 
         if response.ok:
             return response.json()
