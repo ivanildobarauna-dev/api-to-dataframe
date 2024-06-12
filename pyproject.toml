@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "api-to-dataframe"
-version = "0.0.11"
+version = "0.1.0"
 description = "A package to convert API responses to pandas dataframe"
 authors = ["IvanildoBarauna <ivanildo.jnr@outlook.com>"]
 readme = "README.md"
 license = "MIT"
 packages = [{ include = "api_to_dataframe", from = "src" }]
 classifiers=[
-    "Development Status :: 1 - Planning",
+    "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
