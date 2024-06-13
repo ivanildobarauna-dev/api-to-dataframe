@@ -56,14 +56,14 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install Poetry
+      - name: Poetry Setup
         run: |
           pip install --upgrade pip
           curl -sSL https://install.python-poetry.org | python3 -
           poetry config virtualenvs.create false
           poetry install
 
-      - name: Increment version
+      - name: Generate and push Tag
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'

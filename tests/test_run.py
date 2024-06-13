@@ -1,17 +1,23 @@
 import pytest
 import pandas as pd
-import api_to_dataframe as api_to_dataframe
+from api_to_dataframe import ClientBuilder
 
 
 @pytest.fixture()
 def setup():
-    new_client = api_to_dataframe.ClientBuilder(endpoint="https://economia.awesomeapi.com.br/last/USD-BRL")
+    new_client = ClientBuilder(endpoint="https://economia.awesomeapi.com.br/last/USD-BRL")
     return new_client
+
+
+@pytest.fixture()
+def response_setup():
+    new_client = ClientBuilder(endpoint="https://economia.awesomeapi.com.br/last/USD-BRL")
+    return new_client.get_api_data()
 
 
 def test_constructor_without_param():
     with pytest.raises(ValueError):
-        new_client = api_to_dataframe.ClientBuilder(endpoint="")
+        new_client = ClientBuilder(endpoint="")
 
 
 def test_constructor_with_param(setup):
@@ -22,11 +28,10 @@ def test_constructor_with_param(setup):
 
 def test_response_to_json(setup):
     new_client = setup
-    response = new_client._response_to_json()
+    response = new_client.get_api_data()
     assert isinstance(response, dict)
 
 
-def test_to_dataframe(setup):
-    new_client = setup
-    df = new_client.to_dataframe()
+def test_to_dataframe(response_setup):
+    df = ClientBuilder.api_to_dataframe(response_setup)
     assert isinstance(df, pd.DataFrame)
