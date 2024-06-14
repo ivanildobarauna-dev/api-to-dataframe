@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "api-to-dataframe"
-version = "1.0.0"
+version = "1.0.1"
 description = "A package to convert API responses to pandas dataframe"
 authors = ["IvanildoBarauna <ivanildo.jnr@outlook.com>"]
 readme = "README.md"
@@ -25,8 +25,8 @@ license="MIT"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-pandas = "2.0.0"
-requests = "2.30.0"
+pandas = "^2.2.2"
+requests = "^2.32.3"
 
 [build-system]
 requires = ["poetry-core"]
