@@ -12,7 +12,7 @@ Your solution to convert API responses to Pandas DataFrames with retry strategie
 [![CI](https://img.shields.io/github/actions/workflow/status/IvanildoBarauna/api-to-dataframe/CI.yaml?&style=for-the-badge&logo=githubactions&cacheSeconds=60&label=Tests+and+pre+build)](https://github.com/IvanildoBarauna/api-to-dataframe/actions/workflows/CI.yaml)
 [![CD](https://img.shields.io/github/actions/workflow/status/IvanildoBarauna/api-to-dataframe/CD.yaml?&style=for-the-badge&logo=githubactions&cacheSeconds=60&event=release&label=Package_publication)](https://github.com/IvanildoBarauna/api-to-dataframe/actions/workflows/CD.yaml)
 
-![Codecov](https://img.shields.io/codecov/c/github/IvanildoBarauna/api-to-dataframe?style=for-the-badge&logo=codecov)
+[![Codecov](https://img.shields.io/codecov/c/github/IvanildoBarauna/api-to-dataframe?style=for-the-badge&logo=codecov)](https://app.codecov.io/gh/IvanildoBarauna/api-to-dataframe)
 
 ## Project Stack
 
@@ -31,3 +31,37 @@ Your solution to convert API responses to Pandas DataFrames with retry strategie
 
 Python library that simplifies obtaining data from API endpoints by converting them directly into Pandas DataFrames. This library offers robust features, including retry strategies for failed requests and automatic generation of detailed reports on the received data.
 
+## Installation
+
+To install the package using pip, use the following command:
+
+```sh
+pip install api-to-dataframe
+```
+
+To install the package using poetry, use the following command:
+
+```sh
+poetry add api-to-dataframe
+```
+
+## How to use it
+
+``` python
+## Importing library
+from api_to_dataframe import ClientBuilder, RetryStrategies
+
+# Create a client for the API without retry strategy
+client = ClientBuilder(endpoint="https://api.example.com", retry_strategy=RetryStrategies.NoRetryStrategy)
+# or with LinearStrategy (In development, actually don't nothing)
+client = ClientBuilder(endpoint="https://api.example.com", retry_strategy=RetryStrategies.LinearStrategy)
+
+# Get data from the API
+data = client.get_api_data()
+
+# Convert the data to a DataFrame
+df = client.api_to_dataframe(data)
+
+# Display the DataFrame
+print(df)
+```
