@@ -1,6 +1,8 @@
 import pytest
 import pandas as pd
-from api_to_dataframe import ClientBuilder
+import requests
+
+from api_to_dataframe import ClientBuilder, RetryStrategies
 
 
 @pytest.fixture()
@@ -29,7 +31,7 @@ def test_constructor_with_param(setup):
 def test_response_to_json(setup):
     new_client = setup
     response = new_client.get_api_data()
-    assert isinstance(response, dict)
+    assert isinstance(response, requests.Response)
 
 
 def test_to_dataframe(response_setup):
