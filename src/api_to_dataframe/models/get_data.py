@@ -7,16 +7,22 @@ from api_to_dataframe.common.utils.retry_strategies import RetryStrategies
 
 class GetData:
     @staticmethod
-    def get_response(endpoint: str, headers: dict, retry_strategies: RetryStrategies, timeout: int):
+    def get_response(endpoint: str,
+                     headers: dict,
+                     retry_strategies: RetryStrategies,
+                     timeout: int):
         try:
             response = requests.get(endpoint, timeout=timeout, headers=headers)
             response.raise_for_status()
         except HTTPError as http_err:
             print(f'HTTP error occurred: {http_err}')
+            raise http_err
         except Timeout as timeout_err:
             print(f'Timeout error occurred: {timeout_err}')
+            raise timeout_err
         except RequestException as req_err:
             print(f'Error occurred: {req_err}')
+            raise req_err
         else:
             return response
 
