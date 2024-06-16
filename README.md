@@ -51,13 +51,17 @@ poetry add api-to-dataframe
 ## Importing library
 from api_to_dataframe import ClientBuilder, RetryStrategies
 
-# Create a client for the API without retry strategy and default timeout (5 seconds)
+# Create a client for simple ingest data from API (timeout 5 seconds)
 client = ClientBuilder(endpoint="https://api.example.com")
+
 # if you can define timeout, use: (default is 5 seconds), with LinearStrategy (In development, actually don't nothing) and set headers:
 headers = {
     "application_name": "api_to_dataframe"
 }
-client = ClientBuilder(endpoint="https://api.example.com", retry_strategy=RetryStrategies.LinearStrategy, timeout=10, headers=headers)
+client = ClientBuilder(endpoint="https://api.example.com"
+                        ,retry_strategy=RetryStrategies.LinearStrategy
+                        ,timeout=10
+                        ,headers=headers)
 
 ### timeout, retry_strategy and headers are opcionals parameters 
 
