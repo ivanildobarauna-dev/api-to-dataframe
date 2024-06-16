@@ -20,9 +20,6 @@ class GetData:
         except Timeout as timeout_err:
             print(f'Timeout error occurred: {timeout_err}')
             raise timeout_err
-        except RequestException as req_err:
-            print(f'Error occurred: {req_err}')
-            raise req_err
         else:
             return response
 
