@@ -5,6 +5,7 @@ from api_to_dataframe.models.get_data import GetData
 class ClientBuilder:
     def __init__(self,
                  endpoint: str,
+                 headers: dict = {},
                  retry_strategy: RetryStrategies = RetryStrategies.NoRetryStrategy,
                  timeout: int = 5):
         """
@@ -24,6 +25,7 @@ class ClientBuilder:
             self.endpoint = endpoint
             self.retry_strategy = retry_strategy
             self.timeout = timeout
+            self.headers = headers
 
     def get_api_data(self):
         """
@@ -32,7 +34,7 @@ class ClientBuilder:
         Returns:
             dict: The response from the API.
         """
-        response = GetData.get_response(self.endpoint, self.retry_strategy, self.timeout)
+        response = GetData.get_response(self.endpoint, self.headers, self.retry_strategy, self.timeout)
         return response
 
     @staticmethod
