@@ -1,4 +1,4 @@
-from api_to_dataframe.common.utils.retry_strategies import RetryStrategies
+from api_to_dataframe.models.retainer import RetryStrategies
 from api_to_dataframe.models.get_data import GetData
 
 
@@ -6,7 +6,7 @@ class ClientBuilder:
     def __init__(self,
                  endpoint: str,
                  headers: dict = {},
-                 retry_strategy: RetryStrategies = RetryStrategies.NoRetryStrategy,
+                 retry_strategy: RetryStrategies = RetryStrategies.NoRetryStrategy(),
                  timeout: int = 5):
         """
         Initializes an instance of ClientBuilder.
@@ -27,6 +27,7 @@ class ClientBuilder:
             self.timeout = timeout
             self.headers = headers
 
+    @RetryStrategies
     def get_api_data(self):
         """
         Retrieves data from the API using the defined endpoint and retry strategy.

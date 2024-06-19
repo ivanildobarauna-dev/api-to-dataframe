@@ -1,27 +1,27 @@
 import requests
-from requests.exceptions import HTTPError, Timeout, RequestException
+from requests.exceptions import HTTPError, Timeout
 import pandas as pd
 
-from api_to_dataframe.common.utils.retry_strategies import RetryStrategies
+# from api_to_dataframe.common.utils.retry_strategies import RetryStrategies
+from api_to_dataframe.models.retainer import RetryStrategies
 
 
 class GetData:
     @staticmethod
     def get_response(endpoint: str,
                      headers: dict,
-                     retry_strategies: RetryStrategies,
+                     retry_strategy: RetryStrategies,
                      timeout: int):
-        try:
-            response = requests.get(endpoint, timeout=timeout, headers=headers)
-            response.raise_for_status()
-        except HTTPError as http_err:
-            print(f'HTTP error occurred: {http_err}')
-            raise http_err
-        except Timeout as timeout_err:
-            print(f'Timeout error occurred: {timeout_err}')
-            raise timeout_err
-        else:
+
+        try_number = 0
+
+        response = requests.get(endpoint, timeout=timeout, headers=headers)
+
+        if response.status_code == 200:
             return response
+        else:
+            try_number += 1
+            # Retainer.strategy(retry_strategy)
 
     @staticmethod
     def to_dataframe(response):

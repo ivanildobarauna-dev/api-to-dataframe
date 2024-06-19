@@ -1,15 +1,8 @@
-from api_to_dataframe.common.utils.retry_strategies import RetryStrategies
+import time
 
 
-class Retainer:
-    @staticmethod
-    def strategy(retry_strategy: RetryStrategies = RetryStrategies.NoRetryStrategy):
-        if retry_strategy == RetryStrategies.NoRetryStrategy:
-            print("::: NoRetryStrategy :::")
-        elif retry_strategy == RetryStrategies.LinearStrategy:
-            print("::: LinearStrategy :::")
-        elif retry_strategy == RetryStrategies.ExponentialStrategy:
-            print("::: ExponentialStrategy :::")
-        elif retry_strategy == RetryStrategies.CustomStrategy:
-            print("::: CustomStrategy :::")
-
+def RetryStrategies(func):
+    print("Chamada a função RetryStrategies, com os params:", func)
+    def wrapper(*args, **kwargs):
+        print("Chamada do wrapper com os argumentos: ", args, kwargs)
+    return wrapper
