@@ -17,9 +17,45 @@ def response_setup():
     return new_client.get_api_data()
 
 
-def test_constructor_without_param():
+def test_constructor_raises():
     with pytest.raises(ValueError):
         new_client = ClientBuilder(endpoint="")
+
+    with pytest.raises(ValueError):
+        new_client = ClientBuilder(
+            endpoint="https://economia.awesomeapi.com.br/last/USD-BRL",
+            retries=-1
+        )
+
+    with pytest.raises(ValueError):
+        new_client = ClientBuilder(
+            endpoint="https://economia.awesomeapi.com.br/last/USD-BRL",
+            delay=-1
+        )
+
+    with pytest.raises(ValueError):
+        new_client = ClientBuilder(
+            endpoint="https://economia.awesomeapi.com.br/last/USD-BRL",
+            connection_timeout=-1
+        )
+
+    with pytest.raises(ValueError):
+        new_client = ClientBuilder(
+            endpoint="https://economia.awesomeapi.com.br/last/USD-BRL",
+            retries=""
+        )
+
+    with pytest.raises(ValueError):
+        new_client = ClientBuilder(
+            endpoint="https://economia.awesomeapi.com.br/last/USD-BRL",
+            delay=""
+        )
+
+    with pytest.raises(ValueError):
+        new_client = ClientBuilder(
+            endpoint="https://economia.awesomeapi.com.br/last/USD-BRL",
+            connection_timeout=""
+        )
 
 
 def test_constructor_with_param(setup):
@@ -30,7 +66,7 @@ def test_constructor_with_param(setup):
 
 def test_response_to_json(setup):
     new_client = setup
-    response = new_client.get_api_data()
+    response = new_client._get_raw_api_data()
     assert isinstance(response, requests.Response)
 
 
