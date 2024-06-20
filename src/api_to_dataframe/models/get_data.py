@@ -10,19 +10,13 @@ class GetData:
     @staticmethod
     def get_response(endpoint: str,
                      headers: dict,
-                     retry_strategy: RetryStrategies,
-                     timeout: int):
+                     connection_timeout: int):
 
-        try_number = 0
 
-        response = requests.get(endpoint, timeout=timeout, headers=headers)
 
-        if response.status_code == 200:
-            return response
-        else:
-            try_number += 1
-            # Retainer.strategy(retry_strategy)
-
+        response = requests.get(endpoint, timeout=connection_timeout, headers=headers)
+        response.raise_for_status()
+        return response
     @staticmethod
     def to_dataframe(response):
         try:
