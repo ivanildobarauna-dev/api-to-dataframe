@@ -20,7 +20,7 @@ class GetData:
     @staticmethod
     def to_dataframe(response):
         try:
-            df = pd.DataFrame(response.json())
+            df = pd.DataFrame(response)
         except Exception as err:
             raise TypeError(f"Invalid response for transform in dataframe: {err}")
 
