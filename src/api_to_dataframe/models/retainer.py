@@ -10,21 +10,21 @@ class Strategies(Enum):
 
 def RetryStrategies(func):
     def wrapper(*args, **kwargs):
-        attemp = 0
-        while attemp < args[0].retries:
+        retry_number = 0
+        while retry_number < args[0].retries:
             try:
                 return func(*args, **kwargs)
             except Exception as e:
-                attemp += 1
+                retry_number += 1
 
                 if args[0].retry_strategy == Strategies.NoRetryStrategy:
                     break
                 elif args[0].retry_strategy == Strategies.LinearRetryStrategy:
                     time.sleep(args[0].delay)
                 elif args[0].retry_strategy == Strategies.ExponentialRetryStrategy:
-                    time.sleep(args[0].delay * 2 ** attemp)
+                    time.sleep(args[0].delay * 2 ** retry_number)
 
-                if attemp == args[0].retries:
-                    print(f"Failed after {args[0].retries} attempts")
+                if retry_number == args[0].retries:
+                    print(f"Failed after {args[0].retries} retries")
                     raise e
     return wrapper
