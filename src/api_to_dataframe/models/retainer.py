@@ -18,7 +18,7 @@ def RetryStrategies(func):
                 retry_number += 1
 
                 if args[0].retry_strategy == Strategies.NoRetryStrategy:
-                    break
+                    raise e
                 elif args[0].retry_strategy == Strategies.LinearRetryStrategy:
                     time.sleep(args[0].delay)
                 elif args[0].retry_strategy == Strategies.ExponentialRetryStrategy:
