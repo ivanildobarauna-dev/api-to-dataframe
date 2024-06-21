@@ -8,7 +8,7 @@ class ClientBuilder:
                  endpoint: str,
                  headers: dict = None,
                  retry_strategy: Strategies = Strategies.NoRetryStrategy,
-                 retries: int = 2,
+                 retries: int = 1,
                  delay: int = 1,
                  connection_timeout: int = 1):
 
