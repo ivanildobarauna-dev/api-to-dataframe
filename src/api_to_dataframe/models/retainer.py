@@ -25,6 +25,6 @@ def RetryStrategies(func):
                     time.sleep(args[0].delay * 2 ** retry_number)
 
                 if retry_number == args[0].retries:
-                    print(f"Failed after {args[0].retries} retries")
+                    print(f"Failed after {retry_number} retries using {args[0].retry_strategy}")
                     raise e
     return wrapper

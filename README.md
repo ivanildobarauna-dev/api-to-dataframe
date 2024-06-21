@@ -45,23 +45,36 @@ To install the package using poetry, use the following command:
 poetry add api-to-dataframe
 ```
 
-## How to use it
+## User Guide
 
 ``` python
 ## Importing library
 from api_to_dataframe import ClientBuilder, RetryStrategies
 
-# Create a client for simple ingest data from API (timeout 5 seconds)
+# Create a client for simple ingest data from API (timeout 1 second)
 client = ClientBuilder(endpoint="https://api.example.com")
 
-# if you can define timeout, use: (default is 5 seconds), with LinearStrategy (In development, actually don't nothing) and set headers:
+# if you can define timeout with LinearStrategy and set headers:
 headers = {
     "application_name": "api_to_dataframe"
 }
 client = ClientBuilder(endpoint="https://api.example.com"
                         ,retry_strategy=RetryStrategies.LinearStrategy
-                        ,timeout=10
+                        ,connection_timeout=2
                         ,headers=headers)
+
+"""
+    NOTE: by default the quantity of retries is 3 and the time between retries is 1 second, but you can define manually, like this:
+    
+"""
+
+client = ClientBuilder(endpoint="https://api.example.com"
+                        ,retry_strategy=RetryStrategies.LinearStrategy
+                        ,connection_timeout=10
+                        ,headers=headers
+                        ,retries=5
+                        ,delay=10)
+ 
 
 ### timeout, retry_strategy and headers are opcionals parameters 
 
