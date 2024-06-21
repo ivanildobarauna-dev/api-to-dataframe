@@ -2,7 +2,7 @@ import pytest
 import pandas as pd
 import requests
 
-from api_to_dataframe import ClientBuilder, RetryStrategies
+from api_to_dataframe import ClientBuilder
 
 
 @pytest.fixture()
