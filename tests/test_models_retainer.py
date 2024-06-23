@@ -11,7 +11,7 @@ def test_linear_strategy():
         endpoint=endpoint,
         retry_strategy=RetryStrategies.LinearRetryStrategy,
         retries=max_retries,
-        delay=1,
+        initial_delay=1,
         connection_timeout=1
     )
 
@@ -47,7 +47,7 @@ def test_exponential_strategy():
         endpoint=endpoint,
         retry_strategy=RetryStrategies.ExponentialRetryStrategy,
         retries=max_retries,
-        delay=1,
+        initial_delay=1,
         connection_timeout=1
     )
 
