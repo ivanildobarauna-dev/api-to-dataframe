@@ -1,5 +1,5 @@
 # API to DataFrame
-Your solution to convert API responses to Pandas DataFrames with retry strategies and detailed reports.
+Python library that simplifies obtaining data from API endpoints by converting them directly into Pandas DataFrames. This library offers robust features, including retry strategies for failed requests.
 
 [![Github](https://img.shields.io/badge/-Go_to_Github_repository-05122A?style=flat&logo=github)](https://github.com/IvanildoBarauna/api-to-dataframe)
 
@@ -25,11 +25,6 @@ Your solution to convert API responses to Pandas DataFrames with retry strategie
 ![pandas](https://img.shields.io/badge/-pandas-05122A?style=flat&logo=pandas)&nbsp;
 ![pytest](https://img.shields.io/badge/-pytest-05122A?style=flat&logo=pytest)&nbsp;
 
-
-
-## Library Description
-
-Python library that simplifies obtaining data from API endpoints by converting them directly into Pandas DataFrames. This library offers robust features, including retry strategies for failed requests and automatic generation of detailed reports on the received data.
 
 ## Installation
 

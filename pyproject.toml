@@ -1,26 +1,26 @@
 [tool.poetry]
 name = "api-to-dataframe"
-version = "1.2.1"
+version = "1.2.3"
 description = "A package to convert API responses to pandas dataframe"
 authors = ["IvanildoBarauna <ivanildo.jnr@outlook.com>"]
 readme = "README.md"
 license = "MIT"
 classifiers=[
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
 ]
 
-homepage = "https://github.com/IvanildoBarauna/api-to-dataframe"
-repository = "https://github.com/IvanildoBarauna/api-to-dataframe"
-documentation = "https://github.com/IvanildoBarauna/api-to-dataframe#readme"
 
 [tool.poetry.urls]
-Homepage = "https://github.com/IvanildoBarauna/api-to-dataframe"
-Documentation = "https://github.com/IvanildoBarauna/api-to-dataframe#readme"
+Homepage = "https://pypi.org/project/api-to-dataframe"
+Documentation = "https://github.com/IvanildoBarauna/api-to-dataframe/blob/main/README.md"
+Notebook = 'https://github.com/IvanildoBarauna/api-to-dataframe/blob/main/notebooks/example.ipynb'
+ImplementationCase = 'https://github.com/IvanildoBarauna/ETL-awesome-api'
 Issues = "https://github.com/IvanildoBarauna/api-to-dataframe/issues"
+Repository = "https://github.com/IvanildoBarauna/api-to-dataframe"
 
 [tool.poetry.dependencies]
 python = "^3.9"
