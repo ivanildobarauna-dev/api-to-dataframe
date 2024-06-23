@@ -73,7 +73,7 @@ client = ClientBuilder(endpoint="https://api.example.com"
                         ,connection_timeout=10
                         ,headers=headers
                         ,retries=5
-                        ,delay=10)
+                        ,initial_delay=10)
  
 
 ### timeout, retry_strategy and headers are opcionals parameters 

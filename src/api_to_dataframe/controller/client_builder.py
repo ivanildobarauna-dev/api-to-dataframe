@@ -1,5 +1,4 @@
-from api_to_dataframe.models.retainer import RetryStrategies
-from api_to_dataframe.models.retainer import Strategies
+from api_to_dataframe.models.retainer import RetryStrategies, Strategies
 from api_to_dataframe.models.get_data import GetData
 
 
@@ -9,7 +8,7 @@ class ClientBuilder:
                  headers: dict = None,
                  retry_strategy: Strategies = Strategies.NoRetryStrategy,
                  retries: int = 3,
-                 delay: int = 1,
+                 initial_delay: int = 1,
                  connection_timeout: int = 1):
 
         """
@@ -36,7 +35,7 @@ class ClientBuilder:
             raise ValueError("::: endpoint param is mandatory :::")
         if not isinstance(retries, int) or retries < 0:
             raise ValueError("retries must be a non-negative integer")
-        if not isinstance(delay, int) or delay < 0:
+        if not isinstance(initial_delay, int) or initial_delay < 0:
             raise ValueError("delay must be a non-negative integer")
         if not isinstance(connection_timeout, int) or connection_timeout < 0:
             raise ValueError("connection_timeout must be a non-negative integer")
@@ -46,7 +45,7 @@ class ClientBuilder:
         self.connection_timeout = connection_timeout
         self.headers = headers
         self.retries = retries
-        self.delay = delay
+        self.delay = initial_delay
 
     @RetryStrategies
     def get_api_data(self):

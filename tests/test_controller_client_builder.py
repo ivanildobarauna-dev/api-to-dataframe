@@ -30,7 +30,7 @@ def test_constructor_raises():
     with pytest.raises(ValueError):
         new_client = ClientBuilder(
             endpoint="https://economia.awesomeapi.com.br/last/USD-BRL",
-            delay=-1
+            initial_delay=-1
         )
 
     with pytest.raises(ValueError):
@@ -48,7 +48,7 @@ def test_constructor_raises():
     with pytest.raises(ValueError):
         new_client = ClientBuilder(
             endpoint="https://economia.awesomeapi.com.br/last/USD-BRL",
-            delay=""
+            initial_delay=""
         )
 
     with pytest.raises(ValueError):
