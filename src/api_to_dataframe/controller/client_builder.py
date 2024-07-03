@@ -1,5 +1,6 @@
 from api_to_dataframe.models.retainer import retry_strategies, Strategies
 from api_to_dataframe.models.get_data import GetData
+from api_to_dataframe.utils.logger import log, LogLevel
 
 
 class ClientBuilder:
@@ -33,13 +34,17 @@ class ClientBuilder:
         if headers is None:
             headers = {}
         if endpoint == "":
-            raise ValueError("::: endpoint param is mandatory :::")
+            log("endpoint param is mandatory", LogLevel.ERROR)
+            raise ValueError
         if not isinstance(retries, int) or retries < 0:
-            raise ValueError("retries must be a non-negative integer")
+            log("retries must be a non-negative integer", LogLevel.ERROR)
+            raise ValueError
         if not isinstance(initial_delay, int) or initial_delay < 0:
-            raise ValueError("delay must be a non-negative integer")
+            log("delay must be a non-negative integer", LogLevel.ERROR)
+            raise ValueError
         if not isinstance(connection_timeout, int) or connection_timeout < 0:
-            raise ValueError("connection_timeout must be a non-negative integer")
+            log("connection_timeout must be a non-negative integer", LogLevel.ERROR)
+            raise ValueError
 
         self.endpoint = endpoint
         self.retry_strategy = retry_strategy
@@ -61,6 +66,7 @@ class ClientBuilder:
             headers=self.headers,
             connection_timeout=self.connection_timeout,
         )
+
         return response.json()
 
     def _get_raw_api_data(self):
@@ -74,4 +80,5 @@ class ClientBuilder:
     @staticmethod
     def api_to_dataframe(response: dict):
         df = GetData.to_dataframe(response)
+        log("serialized to dataframe: OK", LogLevel.INFO)
         return df
