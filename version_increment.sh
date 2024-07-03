@@ -1,14 +1,14 @@
 #!/bin/bash
 
-read -p "Increment Version? (s/N): " response
+# Use /dev/tty para garantir que a entrada seja lida do terminal
+read -r -p "Increment Version? (s/N): " response </dev/tty
 
 if [[ "$response" =~ ^([sS][iI][mM]|[sS])$ ]]; then
   echo "Choose an option to increment the version:"
   echo "1) Major"
   echo "2) Minor"
   echo "3) Patch"
-  echo "4) Pre-release"
-  read -p "Enter your choice (1/2/3/4): " choice
+  read -r -p "Enter your choice (1/2/3): " choice </dev/tty
 
   case $choice in
     1)
@@ -28,12 +28,6 @@ if [[ "$response" =~ ^([sS][iI][mM]|[sS])$ ]]; then
       git add pyproject.toml
       git commit -m "chore: increase patch version"
       echo "Incremented Patch Version and pyproject.toml added for commit."
-      ;;
-    4)
-      poetry version prerelease
-      git add pyproject.toml
-      git commit -m "chore: increase prerelease version"
-      echo "Incremented Pre-release Version and pyproject.toml added for commit."
       ;;
     *)
       echo "Invalid choice. Version not incremented."
