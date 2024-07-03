@@ -20,7 +20,5 @@ repos:
         args:
           [
             "-rn", # Only display messages
-            "-sn", # Don't display the score
-            # Disable docstring checks and to few public methods
-            "--disable=C0114,C0115,C0116, R0903"
+            "--disable=C0114,C0115,C0116, R0903",
           ]

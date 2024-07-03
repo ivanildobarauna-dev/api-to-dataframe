@@ -19,7 +19,7 @@ Python library that simplifies obtaining data from API endpoints by converting t
 ![Python](https://img.shields.io/badge/-Python-05122A?style=flat&logo=python)&nbsp;
 ![Docker](https://img.shields.io/badge/-Docker-05122A?style=flat&logo=docker)&nbsp;
 ![Poetry](https://img.shields.io/badge/-Poetry-05122A?style=flat&logo=poetry)&nbsp;
-![GitHub Actions](https://img.shields.io/badge/-GitHub_Actions-05122A?style=flat&logo=githubactions)&nbsp; 
+![GitHub Actions](https://img.shields.io/badge/-GitHub_Actions-05122A?style=flat&logo=githubactions)&nbsp;
 ![CodeCov](https://img.shields.io/badge/-CodeCov-05122A?style=flat&logo=codecov)&nbsp;
 ![pypi](https://img.shields.io/badge/-pypi-05122A?style=flat&logo=pypi)&nbsp;
 ![pandas](https://img.shields.io/badge/-pandas-05122A?style=flat&logo=pandas)&nbsp;
@@ -49,29 +49,28 @@ from api_to_dataframe import ClientBuilder, RetryStrategies
 # Create a client for simple ingest data from API (timeout 1 second)
 client = ClientBuilder(endpoint="https://api.example.com")
 
-# if you can define timeout with LinearStrategy and set headers:
+# if you can define timeout with LINEAR_RETRY_STRATEGY and set headers:
 headers = {
     "application_name": "api_to_dataframe"
 }
 client = ClientBuilder(endpoint="https://api.example.com"
-                        ,retry_strategy=RetryStrategies.LinearStrategy
+                        ,retry_strategy=RetryStrategies.LINEAR_RETRY_STRATEGY
                         ,connection_timeout=2
                         ,headers=headers)
 
 """
-    NOTE: by default the quantity of retries is 3 and the time between retries is 1 second, but you can define manually, like this:
-    
+NOTE: by default the quantity of retries is 3 and the time between retries is 1 second, but you can define manually.
 """
 
 client = ClientBuilder(endpoint="https://api.example.com"
-                        ,retry_strategy=RetryStrategies.LinearStrategy
+                        ,retry_strategy=RetryStrategies.LINEAR_RETRY_STRATEGY
                         ,connection_timeout=10
                         ,headers=headers
                         ,retries=5
                         ,initial_delay=10)
- 
 
-### timeout, retry_strategy and headers are opcionals parameters 
+
+### timeout, retry_strategy and headers are opcionals parameters
 
 # Get data from the API
 data = client.get_api_data()

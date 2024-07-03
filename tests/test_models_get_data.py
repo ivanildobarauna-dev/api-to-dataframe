@@ -16,8 +16,7 @@ def test_to_emp_dataframe():
     endpoint = "https://api.exemplo.com"
     expected_response = {}
 
-    responses.add(responses.GET, endpoint,
-                  json=expected_response, status=200)
+    responses.add(responses.GET, endpoint, json=expected_response, status=200)
 
     client = ClientBuilder(endpoint=endpoint)
     response = client.get_api_data()
@@ -31,14 +30,10 @@ def test_http_error():
     endpoint = "https://api.exemplo.com"
     expected_response = {}
 
-    responses.add(responses.GET, endpoint,
-                  json=expected_response, status=400)
+    responses.add(responses.GET, endpoint, json=expected_response, status=400)
 
-    with ((pytest.raises(requests.exceptions.HTTPError))):
-        GetData.get_response(
-            endpoint=endpoint,
-            headers={},
-            connection_timeout=10)
+    with pytest.raises(requests.exceptions.HTTPError):
+        GetData.get_response(endpoint=endpoint, headers={}, connection_timeout=10)
 
 
 @responses.activate
@@ -48,10 +43,7 @@ def test_timeout_error():
     responses.add(responses.GET, endpoint, body=requests.exceptions.Timeout())
 
     with pytest.raises(requests.exceptions.Timeout):
-        GetData.get_response(
-            endpoint=endpoint,
-            headers={},
-            connection_timeout=10)
+        GetData.get_response(endpoint=endpoint, headers={}, connection_timeout=10)
 
 
 @responses.activate
@@ -60,11 +52,7 @@ def test_request_exception():
 
     expected_response = {}
 
-    responses.add(responses.GET, endpoint,
-                  json=expected_response, status=500)
+    responses.add(responses.GET, endpoint, json=expected_response, status=500)
 
     with pytest.raises(requests.exceptions.RequestException):
-        GetData.get_response(
-            endpoint=endpoint,
-            headers={},
-            connection_timeout=10)
+        GetData.get_response(endpoint=endpoint, headers={}, connection_timeout=10)
