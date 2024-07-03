@@ -30,7 +30,7 @@ jobs:
           poetry install
 
       - name: Run tests & CodeCov
-        run: |          
+        run: |
           coverage run -m pytest
           coverage report
           coverage xml
