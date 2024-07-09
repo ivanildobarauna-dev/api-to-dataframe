@@ -66,8 +66,8 @@ def test_constructor_with_param(client_setup):  # pylint: disable=redefined-oute
 
 def test_response_to_json(client_setup):  # pylint: disable=redefined-outer-name
     new_client = client_setup
-    response = new_client._get_raw_api_data()  # pylint: disable=protected-access
-    assert isinstance(response, requests.Response)
+    response = new_client.get_api_data()  # pylint: disable=protected-access
+    assert isinstance(response, dict)
 
 
 def test_to_dataframe(response_setup):  # pylint: disable=redefined-outer-name
