@@ -19,10 +19,10 @@ class ClientBuilder:
         Args:
             endpoint (str): The API endpoint to connect to.
             headers (dict, optional): The headers to use for the API request. Defaults to None.
-            retry_strategy (Strategies, optional): Defaults to Strategies.NoRetryStrategy.
+            retry_strategy (Strategies, optional): Defaults to Strategies.NO_RETRY_STRATEGY.
             retries (int): The number of times to retry a failed request. Defaults to 3.
             initial_delay (int): The delay between retries in seconds. Defaults to 1.
-            connection_timeout (int): The timeout for the connection in seconds. Defaults to 2.
+            connection_timeout (int): The timeout for the connection in seconds. Defaults to 1.
 
         Raises:
             ValueError: If endpoint is an empty string.
@@ -58,8 +58,12 @@ class ClientBuilder:
         """
         Retrieves data from the API using the defined endpoint and retry strategy.
 
+        This function sends a request to the API using the endpoint, headers, and
+        connection timeout specified in the instance attributes. It uses the
+        defined retry strategy to handle potential failures and retries.
+
         Returns:
-            dict: The response from the API.
+            dict: The JSON response from the API as a dictionary.
         """
         response = GetData.get_response(
             endpoint=self.endpoint,
@@ -69,16 +73,21 @@ class ClientBuilder:
 
         return response.json()
 
-    def _get_raw_api_data(self):
-        response = GetData.get_response(
-            endpoint=self.endpoint,
-            headers=self.headers,
-            connection_timeout=self.connection_timeout,
-        )
-        return response
-
     @staticmethod
     def api_to_dataframe(response: dict):
+        """
+        Converts an API response to a DataFrame.
+
+        This function takes a dictionary response from an API,
+        uses the `to_dataframe` function from the `GetData` class
+        to convert it into a DataFrame, and logs the operation as successful.
+
+        Args:
+            response (dict): The dictionary containing the API response.
+
+        Returns:
+            DataFrame: A pandas DataFrame containing the data from the API response.
+        """
         df = GetData.to_dataframe(response)
         log("serialized to dataframe: OK", LogLevel.INFO)
         return df
