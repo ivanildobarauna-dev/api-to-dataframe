@@ -20,8 +20,4 @@ logging.basicConfig(
 def log(message: str, level: LogLevel):
     logger = logging.getLogger("api-to-dataframe")
     logger.log(level.value, message)
-
-
-log("This is an info message", LogLevel.INFO)
-log("This is a warning message", LogLevel.WARNING)
-log("This is an error message", LogLevel.ERROR)
+    
