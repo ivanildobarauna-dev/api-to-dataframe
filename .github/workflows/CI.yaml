@@ -70,3 +70,21 @@ jobs:
           git push
           git tag -f $(poetry version -s)
           git push -f origin --tags
+
+      - name: Build package
+        run: poetry build
+
+      - name: Repository Setup
+        run: |
+          poetry config repositories.test-pypi https://test.pypi.org/legacy/
+#          poetry config pypi-token.test-pypi ${{ secrets.TEST_PYPI_TOKEN }}
+#          poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
+
+      - name: Publish package to TestPyPI
+        env:
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.TEST_PYPI_TOKEN }}
+        run: poetry publish -r test-pypi -u __token__ --password $POETRY_PYPI_TOKEN_PYPI
+
+    environment:
+      name: Development
+      url: https://test.pypi.org/project/api-to-dataframe/
