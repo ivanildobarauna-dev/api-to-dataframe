@@ -1,6 +1,5 @@
 import pytest
 import pandas as pd
-import requests
 
 from api_to_dataframe import ClientBuilder
 

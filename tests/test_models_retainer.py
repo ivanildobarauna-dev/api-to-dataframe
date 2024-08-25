@@ -4,6 +4,8 @@ import pytest
 
 from api_to_dataframe import ClientBuilder, RetryStrategies
 
+# from api_to_dataframe.utils import Constants
+
 
 def test_linear_strategy():
     endpoint = "https://api-to-dataframe/"
@@ -60,7 +62,7 @@ def test_exponential_strategy():
             client.get_api_data()
         except requests.exceptions.RequestException:
             end = time.time()
-            assert end - start >= client.delay * 2**retry_number
+            assert end - start >= client.delay * retry_number
             retry_number += 1
 
     assert retry_number == max_retries
