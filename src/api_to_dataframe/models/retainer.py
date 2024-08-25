@@ -18,7 +18,7 @@ def retry_strategies(func):
         while retry_number < args[0].retries:
             try:
                 log(
-                    f"Trying for the {retry_number} of {args[0].retries} retries. "
+                    f"Trying for the {retry_number} of {Constants.MAX_OF_RETRIES} retries. "
                     f"Using {args[0].retry_strategy}",
                     LogLevel.INFO,
                 )
