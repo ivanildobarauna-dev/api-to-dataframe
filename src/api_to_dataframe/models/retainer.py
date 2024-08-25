@@ -28,9 +28,9 @@ def retry_strategies(func):
                 if args[0].retry_strategy == Strategies.NO_RETRY_STRATEGY:
                     raise e
                 if args[0].retry_strategy == Strategies.LINEAR_RETRY_STRATEGY:
-                    time.sleep(args[0].delay)
+                    time.sleep(args[0].initial_delay)
                 elif args[0].retry_strategy == Strategies.EXPONENTIAL_RETRY_STRATEGY:
-                    time.sleep(args[0].delay * 2**retry_number)
+                    time.sleep(args[0].initial_delay * retry_number)
 
                 if retry_number == args[0].retries or retry_number == Constants.MAX_OF_RETRIES:
                     log(
