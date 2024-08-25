@@ -39,4 +39,4 @@ def retry_strategies(func):
                     )
                     raise e
 
-    return wrapperpoetry ins
+    return wrapper
