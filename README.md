@@ -58,19 +58,14 @@ client = ClientBuilder(endpoint="https://api.example.com"
                         ,connection_timeout=2
                         ,headers=headers)
 
-"""
-NOTE: by default the quantity of retries is 3 and the time between retries is 1 second, but you can define manually.
-"""
-
+# if you can define timeout with EXPONENTIAL_RETRY_STRATEGY and set headers:
 client = ClientBuilder(endpoint="https://api.example.com"
-                        ,retry_strategy=RetryStrategies.LINEAR_RETRY_STRATEGY
+                        ,retry_strategy=RetryStrategies.EXPONENTIAL_RETRY_STRATEGY
                         ,connection_timeout=10
                         ,headers=headers
                         ,retries=5
                         ,initial_delay=10)
-
-
-### timeout, retry_strategy and headers are opcionals parameters
+ 
 
 # Get data from the API
 data = client.get_api_data()
@@ -81,3 +76,27 @@ df = client.api_to_dataframe(data)
 # Display the DataFrame
 print(df)
 ```
+
+## Important notes:
+* **Opcionals Parameters:** The params timeout, retry_strategy and headers are opcionals.
+* **Default Params Value:** By default the quantity of retries is 3 and the time between retries is 1 second, but you can define manually.
+* **Max Of Retries:** For security of API Server there is a limit for quantity of retries, actually this value is 5, this value is defined in lib constant. You can inform any value in RETRIES param, but the lib only will try 5x.
+* **Exponential Retry Strategy:** The increment of time between retries is time passed in **initial_delay** param * 2 * the retry_number, e.g with initial_delay=1
+
+    RetryNumber  | WaitingTime 
+    ------------ | -----------
+    1            |  1s
+    2            |  2s
+    3            |  4s
+    4            |  6s
+    5            |  8s
+* **Linear Retry Strategy:** The increment of time between retries is time passed in **initial_delay**
+e.g with initial_delay=1
+
+    RetryNumber  | WaitingTime 
+    ------------ | -----------
+    1            |  1s
+    2            |  1s
+    3            |  1s
+    4            |  1s
+    5            |  1s
