@@ -2,6 +2,7 @@ import time
 from enum import Enum
 from requests.exceptions import RequestException
 from api_to_dataframe.utils.logger import log, LogLevel
+from api_to_dataframe.utils import Constants
 
 
 class Strategies(Enum):
@@ -31,7 +32,7 @@ def retry_strategies(func):
                 elif args[0].retry_strategy == Strategies.EXPONENTIAL_RETRY_STRATEGY:
                     time.sleep(args[0].delay * 2**retry_number)
 
-                if retry_number == args[0].retries:
+                if retry_number == args[0].retries or retry_number == Constants.MAX_OF_RETRIES:
                     log(
                         f"Failed after {retry_number} retries using {args[0].retry_strategy}",
                         LogLevel.ERROR,
