@@ -65,7 +65,7 @@ client = ClientBuilder(endpoint="https://api.example.com"
                         ,headers=headers
                         ,retries=5
                         ,initial_delay=10)
- 
+
 
 # Get data from the API
 data = client.get_api_data()
@@ -81,22 +81,22 @@ print(df)
 * **Opcionals Parameters:** The params timeout, retry_strategy and headers are opcionals.
 * **Default Params Value:** By default the quantity of retries is 3 and the time between retries is 1 second, but you can define manually.
 * **Max Of Retries:** For security of API Server there is a limit for quantity of retries, actually this value is 5, this value is defined in lib constant. You can inform any value in RETRIES param, but the lib only will try 5x.
-* **Exponential Retry Strategy:** The increment of time between retries is time passed in **initial_delay** param * 2 * the retry_number, e.g with initial_delay=1
+* **Exponential Retry Strategy:** The increment of time between retries is time passed in **initial_delay** param * 2 * the retry_number, e.g with initial_delay=2
 
-    RetryNumber  | WaitingTime 
+    RetryNumber  | WaitingTime
     ------------ | -----------
-    1            |  1s
     2            |  2s
-    3            |  4s
-    4            |  6s
-    5            |  8s
+    2            |  4s
+    3            |  6s
+    4            |  8s
+    5            |  10s
 * **Linear Retry Strategy:** The increment of time between retries is time passed in **initial_delay**
-e.g with initial_delay=1
+e.g with initial_delay=2
 
-    RetryNumber  | WaitingTime 
+    RetryNumber  | WaitingTime
     ------------ | -----------
-    1            |  1s
-    2            |  1s
-    3            |  1s
-    4            |  1s
-    5            |  1s
+    1            |  2s
+    2            |  2s
+    3            |  2s
+    4            |  2s
+    5            |  2s
