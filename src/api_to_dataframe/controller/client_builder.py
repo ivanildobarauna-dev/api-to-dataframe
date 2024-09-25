@@ -4,7 +4,7 @@ from api_to_dataframe.utils.logger import log, LogLevel
 
 
 class ClientBuilder:
-    def __init__(  # pylint: disable=too-many-arguments
+    def __init__(  # pylint: disable=too-many-positional-arguments,too-many-arguments
         self,
         endpoint: str,
         headers: dict = None,
@@ -89,5 +89,4 @@ class ClientBuilder:
             DataFrame: A pandas DataFrame containing the data from the API response.
         """
         df = GetData.to_dataframe(response)
-        log("serialized to dataframe: OK", LogLevel.INFO)
         return df
