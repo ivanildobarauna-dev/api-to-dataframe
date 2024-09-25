@@ -9,7 +9,6 @@ class GetData:
     def get_response(endpoint: str, headers: dict, connection_timeout: int):
         response = requests.get(endpoint, timeout=connection_timeout, headers=headers)
         response.raise_for_status()
-        log("get_response: ok", LogLevel.INFO)
         return response
 
     @staticmethod
