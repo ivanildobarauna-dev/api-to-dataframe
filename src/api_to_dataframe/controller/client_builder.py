@@ -1,6 +1,7 @@
 from api_to_dataframe.models.retainer import retry_strategies, Strategies
 from api_to_dataframe.models.get_data import GetData
 from api_to_dataframe.utils.logger import log, LogLevel
+from api_to_dataframe.utils.metrics import MetricsClient
 
 
 class ClientBuilder:
@@ -52,6 +53,10 @@ class ClientBuilder:
         self.headers = headers
         self.retries = retries
         self.delay = initial_delay
+        self.metrics_client = MetricsClient()
+
+        self.metrics_client.increment("builded_client")
+
 
     @retry_strategies
     def get_api_data(self):
@@ -65,11 +70,17 @@ class ClientBuilder:
         Returns:
             dict: The JSON response from the API as a dictionary.
         """
+
+        self.metrics_client.increment("get_api_data_attempt")
+
         response = GetData.get_response(
             endpoint=self.endpoint,
             headers=self.headers,
             connection_timeout=self.connection_timeout,
         )
+
+
+        self.metrics_client.increment("get_api_data_success")
 
         return response.json()
 
@@ -88,5 +99,9 @@ class ClientBuilder:
         Returns:
             DataFrame: A pandas DataFrame containing the data from the API response.
         """
+        MetricsClient().increment("api_to_dataframe_attempt")
+
         df = GetData.to_dataframe(response)
+
+        MetricsClient().increment("api_to_dataframe_success")
         return df
