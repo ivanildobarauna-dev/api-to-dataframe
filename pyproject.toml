@@ -28,6 +28,7 @@ pandas = "^2.2.3"
 requests = "^2.32.3"
 logging = "^0.4.9.6"
 datadog = "^0.50.2"
+otel-wrapper = {git = "https://github.com/ivanildobarauna-dev/open-o11y-wrapper.git", rev = "2.0.0"}
 
 [tool.poetry.group.dev.dependencies]
 poetry-dynamic-versioning = "^1.3.0"
