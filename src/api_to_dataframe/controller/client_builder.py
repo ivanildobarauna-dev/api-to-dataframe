@@ -1,7 +1,7 @@
 from api_to_dataframe.models.retainer import retry_strategies, Strategies
 from api_to_dataframe.models.get_data import GetData
-from api_to_dataframe.utils.logger import log, LogLevel
-from api_to_dataframe.utils.metrics import MetricsClient
+from api_to_dataframe.utils.logger import logger
+from otel_wrapper import OpenObservability
 
 
 class ClientBuilder:
@@ -35,16 +35,16 @@ class ClientBuilder:
         if headers is None:
             headers = {}
         if endpoint == "":
-            log("endpoint param is mandatory", LogLevel.ERROR)
+            logger.error("endpoint cannot be an empty string")
             raise ValueError
         if not isinstance(retries, int) or retries < 0:
-            log("retries must be a non-negative integer", LogLevel.ERROR)
+            logger.error("retries must be a non-negative integer")
             raise ValueError
         if not isinstance(initial_delay, int) or initial_delay < 0:
-            log("delay must be a non-negative integer", LogLevel.ERROR)
+            logger.error("initial_delay must be a non-negative integer")
             raise ValueError
         if not isinstance(connection_timeout, int) or connection_timeout < 0:
-            log("connection_timeout must be a non-negative integer", LogLevel.ERROR)
+            logger.error("connection_timeout must be a non-negative integer")
             raise ValueError
 
         self.endpoint = endpoint
@@ -53,10 +53,9 @@ class ClientBuilder:
         self.headers = headers
         self.retries = retries
         self.delay = initial_delay
-        self.metrics_client = MetricsClient()
-
-        self.metrics_client.increment("builded_client")
-
+        self._o11y_wrapper = OpenObservability(application_name="api-to-dataframe").get_wrapper()
+        self._traces = self._o11y_wrapper.traces()
+        self._tracer = self._traces.get_tracer()
 
     @retry_strategies
     def get_api_data(self):
@@ -71,16 +70,15 @@ class ClientBuilder:
             dict: The JSON response from the API as a dictionary.
         """
 
-        self.metrics_client.increment("get_api_data_attempt")
+        with self._tracer.start_as_current_span("get_last_quote") as span:
+            span.set_attribute("endpoint", self.endpoint)
 
-        response = GetData.get_response(
-            endpoint=self.endpoint,
-            headers=self.headers,
-            connection_timeout=self.connection_timeout,
-        )
+            response = GetData.get_response(
+                endpoint=self.endpoint,
+                headers=self.headers,
+                connection_timeout=self.connection_timeout,
+            )
 
-
-        self.metrics_client.increment("get_api_data_success")
 
         return response.json()
 
@@ -99,9 +97,7 @@ class ClientBuilder:
         Returns:
             DataFrame: A pandas DataFrame containing the data from the API response.
         """
-        MetricsClient().increment("api_to_dataframe_attempt")
 
         df = GetData.to_dataframe(response)
 
-        MetricsClient().increment("api_to_dataframe_success")
         return df
