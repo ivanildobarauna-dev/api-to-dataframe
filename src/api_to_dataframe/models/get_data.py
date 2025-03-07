@@ -1,8 +1,6 @@
 import requests
 import pandas as pd
 
-from api_to_dataframe.utils.logger import log, LogLevel
-
 
 class GetData:
     @staticmethod
@@ -16,13 +14,11 @@ class GetData:
         try:
             df = pd.DataFrame(response)
         except Exception as err:
-            log(f"Error serializing to dataframe: {err}", LogLevel.ERROR)
             raise TypeError(
                 f"Invalid response for transform in dataframe: {err}"
             ) from err
 
         if df.empty:
-            log("DataFrame is empty", LogLevel.ERROR)
             raise ValueError("::: DataFrame is empty :::")
 
         return df
