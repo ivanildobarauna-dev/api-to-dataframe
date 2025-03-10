@@ -7,21 +7,8 @@ repos:
 
   # - repo: local
   #   hooks:
-  #     - id: pylint
-  #       name: pylint
-  #       entry: pylint
-  #       language: system
-  #       types: [python]
-  #       args:
-  #         [
-  #           "-rn", # Only display messages
-  #           "--disable=C0114,C0115,C0116, R0903",
-  #         ]
-
-#  - repo: local
-#    hooks:
-#      - id: version-inc
-#        name: Version Increase
-#        entry: ./version_increment.sh
-#        language: script
-#        files: .*
+  #     - id: version-inc
+  #       name: Version Increase
+  #       entry: ./auto_version_bump.sh
+  #       language: script
+  #       files: .*
