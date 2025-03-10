@@ -718,7 +718,7 @@ description = "Fundamental package for array computing in Python"
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
-markers = "python_version == \"3.11\" or python_version >= \"3.12\""
+markers = "python_version >= \"3.12\" or python_version == \"3.11\""
 files = [
     {file = "numpy-2.2.3-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:cbc6472e01952d3d1b2772b720428f8b90e2deea8344e854df22b0618e9cce71"},
     {file = "numpy-2.2.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:cdfe0c22692a30cd830c0755746473ae66c4a8f2e7bd508b35fb3b6a0813d787"},
@@ -978,15 +978,15 @@ files = [
 
 [[package]]
 name = "otel-wrapper"
-version = "0.0.1"
+version = "0.1.0"
 description = "OpenTelemetry Wrapper to send traces, metrics and logs to my otel-proxy using OTLP Protocol"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
 markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
 files = [
-    {file = "otel_wrapper-0.0.1-py3-none-any.whl", hash = "sha256:869231960e7b9e1ee8ed293f2a11f9719bcd9f52b5b6da1bf9d581e3701658fd"},
-    {file = "otel_wrapper-0.0.1.tar.gz", hash = "sha256:f5b39c3fd636ce766a5935ace1cc40396be950e50acb33781bccdab42577ef35"},
+    {file = "otel_wrapper-0.1.0-py3-none-any.whl", hash = "sha256:79c8764ccc0ecc77a5bccf06be0db5bd93f23e1b68adbe45a489931d04a9f2d0"},
+    {file = "otel_wrapper-0.1.0.tar.gz", hash = "sha256:72da842aed240cf93b66d66ff55c8c19732e24cc9d0f3814e3d4b6af9bc3ac19"},
 ]
 
 [package.dependencies]
@@ -1065,8 +1065,8 @@ files = [
 [package.dependencies]
 numpy = [
     {version = ">=1.22.4", markers = "python_version < \"3.11\""},
-    {version = ">=1.23.2", markers = "python_version == \"3.11\""},
     {version = ">=1.26.0", markers = "python_version >= \"3.12\""},
+    {version = ">=1.23.2", markers = "python_version == \"3.11\""},
 ]
 python-dateutil = ">=2.8.2"
 pytz = ">=2020.1"
@@ -1342,8 +1342,8 @@ astroid = ">=3.3.8,<=3.4.0-dev0"
 colorama = {version = ">=0.4.5", markers = "sys_platform == \"win32\""}
 dill = [
     {version = ">=0.2", markers = "python_version < \"3.11\""},
-    {version = ">=0.3.6", markers = "python_version >= \"3.11\" and python_version < \"3.12\""},
     {version = ">=0.3.7", markers = "python_version >= \"3.12\""},
+    {version = ">=0.3.6", markers = "python_version >= \"3.11\" and python_version < \"3.12\""},
 ]
 isort = ">=4.2.5,<5.13.0 || >5.13.0,<7"
 mccabe = ">=0.6,<0.8"
@@ -1745,4 +1745,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.9"
-content-hash = "8fc40c2fc583487e59a9535d1b5eac98d65842d4b348cc6296f948eea3046a0a"
+content-hash = "122277f0c2cc0f28c4090cea45cdba47d4a7aa2c7f316692c213916a81b392a8"
