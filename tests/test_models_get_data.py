@@ -7,7 +7,7 @@ from api_to_dataframe.controller.client_builder import ClientBuilder
 
 
 def test_to_dataframe():
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         GetData.to_dataframe("")
 
 
