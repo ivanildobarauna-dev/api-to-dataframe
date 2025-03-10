@@ -58,3 +58,25 @@ disable = [
     "C0115", # missing-class-docstring
     "R0903", # too-few-public-methods
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.coverage.run]
+source = ["src/api_to_dataframe"]
+omit = [
+    "tests/*",
+    "temp/*",
+    "*/__init__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
