@@ -1,6 +1,8 @@
 import pytest
 import requests
 import responses
+import pandas as pd
+import json
 
 from api_to_dataframe.models.get_data import GetData
 from api_to_dataframe.controller.client_builder import ClientBuilder
@@ -26,6 +28,43 @@ def test_to_emp_dataframe():
 
 
 @responses.activate
+def test_valid_dataframe_conversion():
+    """Test successful conversion of valid data to DataFrame"""
+    # A estrutura do dict afeta como o pandas cria o DataFrame
+    # Os dados precisam estar em uma lista para serem convertidos em linhas
+    valid_data = [{"id": 1, "name": "Test"}, {"id": 2, "name": "Test2"}]
+    df = GetData.to_dataframe(valid_data)
+
+    assert isinstance(df, pd.DataFrame)
+    assert len(df) == 2
+    assert "id" in df.columns
+    assert "name" in df.columns
+    assert df.iloc[0]["id"] == 1
+    assert df.iloc[1]["name"] == "Test2"
+
+
+@responses.activate
+def test_nested_data_conversion():
+    """Test conversion of nested data structures"""
+    # Lista de dicionários é mais adequado para converter em DataFrame
+    nested_data = [
+        {"user": {"id": 1, "profile": {"name": "User1"}}},
+        {"user": {"id": 2, "profile": {"name": "User2"}}}
+    ]
+
+    # Convert to string and back to dict to simulate JSON response
+    json_str = json.dumps(nested_data)
+    response_list = json.loads(json_str)
+
+    df = GetData.to_dataframe(response_list)
+    assert isinstance(df, pd.DataFrame)
+    assert not df.empty
+    assert len(df) == 2
+    # Verificar estrutura das colunas
+    assert "user" in df.columns
+
+
+@responses.activate
 def test_http_error():
     endpoint = "https://api.exemplo.com"
     expected_response = {}
@@ -34,6 +73,23 @@ def test_http_error():
 
     with pytest.raises(requests.exceptions.HTTPError):
         GetData.get_response(endpoint=endpoint, headers={}, connection_timeout=10)
+
+
+@responses.activate
+def test_http_error_with_custom_message():
+    """Test HTTP error with custom error message in response"""
+    endpoint = "https://api.exemplo.com/error"
+    error_response = {"error": "Bad Request", "message": "Invalid parameters"}
+
+    responses.add(
+        responses.GET,
+        endpoint,
+        json=error_response,
+        status=400
+    )
+
+    with pytest.raises(requests.exceptions.HTTPError):
+        response = GetData.get_response(endpoint=endpoint, headers={}, connection_timeout=10)
 
 
 @responses.activate
@@ -56,3 +112,37 @@ def test_request_exception():
 
     with pytest.raises(requests.exceptions.RequestException):
         GetData.get_response(endpoint=endpoint, headers={}, connection_timeout=10)
+
+
+@responses.activate
+def test_headers_passed_correctly():
+    """Test that headers are correctly passed to the request"""
+    endpoint = "https://api.exemplo.com/headers"
+    expected_response = {"success": True}
+    custom_headers = {
+        "Authorization": "Bearer test-token",
+        "X-Custom-Header": "test-value",
+        "Content-Type": "application/json"
+    }
+
+    def match_headers(request):
+        for key, value in custom_headers.items():
+            if request.headers.get(key) != value:
+                return (400, {}, json.dumps({"error": "Header mismatch"}))
+        return (200, {}, json.dumps(expected_response))
+
+    responses.add_callback(
+        responses.GET,
+        endpoint,
+        callback=match_headers,
+        content_type="application/json"
+    )
+
+    response = GetData.get_response(
+        endpoint=endpoint,
+        headers=custom_headers,
+        connection_timeout=10
+    )
+
+    assert response.status_code == 200
+    assert response.json() == expected_response
