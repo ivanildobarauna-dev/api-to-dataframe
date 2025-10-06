@@ -3,6 +3,8 @@
 # Use /dev/tty para garantir que a entrada seja lida do terminal
 read -r -p "Increment Version? (s/N): " response </dev/tty
 
+
+
 if [[ "$response" =~ ^([sS][iI][mM]|[sS])$ ]]; then
   echo "Choose an option to increment the version:"
   echo "1) Major"
